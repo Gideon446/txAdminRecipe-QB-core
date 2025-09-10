@@ -340,16 +340,6 @@ tasks:
     overwrite: true
 
   - action: download_github
-    dest: ./resources/[addon]/md-drugs
-    ref: main
-    src: https://github.com/Mustachedom/md-drugs
-
-  - action: copy_path
-    src: ./resources/[addon]/md-drugs/items_install/images
-    dest: ./resources/[ox]/ox_inventory/web/images
-    overwrite: true
-
-  - action: download_github
     dest: ./resources/[addon]/mana_hunting
     ref: master
     src: https://github.com/Manason/mana_hunting/tree/master
