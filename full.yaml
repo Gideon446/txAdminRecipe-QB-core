@@ -3,7 +3,7 @@ $onesync: on
 name: The Orders Recipe
 version: 0.0.1
 author: The contributors of these great resources.
-description: An adjusted reipe for qb-core using ox inventory as well as more community resources.
+description: An adjusted recipe for qb-core using ox inventory as well as more community resources.
 
 tasks:
 
@@ -48,9 +48,6 @@ tasks:
 
   - action: query_database
     file: ./tmp/theorder/sqlfiles/psbanking.sql
-
-  - action: query_database
-    file: ./tmp/theorder/sqlfiles/mddrugs.sql
 
   - action: query_database
     file: ./tmp/theorder/sqlfiles/psmdt.sql
@@ -150,6 +147,21 @@ tasks:
     ref: main
     src: https://github.com/TheOrderFivem/community_bridge/
 
+  - action: move_path
+    src: ./tmp/theorder/edits/community_bridge/settings/clientConfig.lua
+    dest: ./resources/[libs]/community_bridge/settings/clientConfig.lua
+    overwrite: true
+
+  - action: move_path
+    src: ./tmp/theorder/edits/community_bridge/settings/serverConfig.lua
+    dest: ./resources/[libs]/community_bridge/settings/serverConfig.lua
+    overwrite: true
+
+  - action: move_path
+    src: ./tmp/theorder/edits/community_bridge/settings/sharedConfig.lua
+    dest: ./resources/[libs]/community_bridge/settings/sharedConfig.lua
+    overwrite: true
+
   - action: download_github
     dest: ./resources/[libs]/bl_bridge
     ref: main
@@ -222,7 +234,7 @@ tasks:
     src: ./tmp/ox_doorlock.zip
 
   - action: waste_time # prevent github throttling
-    seconds: 10
+    seconds: 5
 
     # images
   - action: download_file
@@ -264,10 +276,21 @@ tasks:
     ref: main
     src: https://github.com/rumaier/r_communityservice
 
-  - action: download_github
-    dest: ./resources/[addon]/cw-crafting
-    ref: main
-    src: https://github.com/Coffeelot/cw-crafting/releases/latest/download/cw-crafting.zip
+  - action: download_file
+    path: ./tmp/r_drugsales.zip
+    url: https://github.com/rumaier/r_drugsales/releases/latest/download/r_drugsales.zip
+
+  - action: unzip
+    dest: ./resources/[addon]
+    src: ./tmp/r_drugsales.zip
+
+  - action: download_file
+    path: ./tmp/cw-crafting.zip
+    url: https://github.com/Coffeelot/cw-crafting/releases/latest/download/cw-crafting.zip
+
+  - action: unzip
+    dest: ./resources/[addon]
+    src: ./tmp/cw-crafting.zip
 
   - action: download_file
     path: ./tmp/bl_customs.zip
@@ -280,19 +303,26 @@ tasks:
   - action: download_file
     path: ./tmp/ac_scoreboard.zip
     url: https://github.com/acscripts/ac_scoreboard/releases/latest/download/ac_scoreboard.zip
+
   - action: unzip
     dest: ./resources/[addon]
     src: ./tmp/ac_scoreboard.zip
+
+  - action: waste_time # prevent github throttling
+    seconds: 3
 
   - action: download_github
     dest: ./resources/[addon]/mt_policeradar
     ref: main
     src: https://github.com/MT-Scripts/mt_policeradar
 
-  - action: download_github
-    dest: ./resources/[addon]/lc_fuel
-    ref: main
-    src: https://github.com/LeonardoSoares98/lc_fuel/releases/latest/download/lc_fuel.zip
+  - action: download_file
+    path: ./tmp/lc_fuel.zip
+    url: https://github.com/LeonardoSoares98/lc_fuel/releases/latest/download/lc_fuel.zip
+
+  - action: unzip
+    dest: ./resources/[addon]
+    src: ./tmp/lc_fuel.zip
 
   - action: download_github
     dest: ./resources/[addon]/um-idcard
@@ -332,7 +362,7 @@ tasks:
   - action: download_github
     dest: ./resources/[addon]/wasabi_fishing
     ref: main
-    src: https://github.com/wasabirobby/wasabi_fishing/tree/main
+    src: https://github.com/wasabirobby/wasabi_fishing
 
   - action: copy_path
     src: ./resources/[addon]/wasabi_fishing/Inventory_Items/InventoryImages
@@ -342,7 +372,7 @@ tasks:
   - action: download_github
     dest: ./resources/[addon]/mana_hunting
     ref: master
-    src: https://github.com/Manason/mana_hunting/tree/master
+    src: https://github.com/Manason/mana_hunting
   
   - action: copy_path
     src: ./resources/[addon]/mana_hunting/img
@@ -352,13 +382,39 @@ tasks:
   - action: remove_path
     path: ./resources/[ox]/ox_inventory/web/images/gimp
 
-  - action: waste_time # prevent github throttling
-    seconds: 10
-
   - action: download_github
     dest: ./resources/[addon]/rpemotes-reborn
     ref: master
     src: https://github.com/alberttheprince/rpemotes-reborn
+
+  - action: waste_time # prevent github throttling
+    seconds: 4
+
+
+  - action: download_github
+    dest: ./resources/[addon]/mrc-storage
+    ref: main
+    src: https://github.com/gononono64/mrc-storage
+
+  - action: copy_path
+    src: ./resources/[addon]/mrc-storage/images/boltcutters.png
+    dest: ./resources/[ox]/ox_inventory/web/images/boltcutters.png
+    overwrite: true
+
+  - action: copy_path
+    src: ./resources/[addon]/mrc-storage/images/keypad.png
+    dest: ./resources/[ox]/ox_inventory/web/images/keypad.png
+    overwrite: true
+
+  - action: copy_path
+    src: ./resources/[addon]/mrc-storage/images/lock.png
+    dest: ./resources/[ox]/ox_inventory/web/images/lock.png
+    overwrite: true
+
+  - action: copy_path
+    src: ./resources/[addon]/mrc-storage/images/storage_box.png
+    dest: ./resources/[ox]/ox_inventory/web/images/storage_box.png
+    overwrite: true
 
     # VOICE
   - action: download_github
@@ -388,6 +444,9 @@ tasks:
     dest: ./resources/[assets]/pillbox
     ref: main
     src: https://github.com/Lorenc95/pillbox
+
+  - action: waste_time # prevent github throttling before QBCore resources
+    seconds: 3
 
   # Downloading QBCore resources
   - action: download_github
@@ -466,7 +525,7 @@ tasks:
     src: https://github.com/qbcore-framework/qb-mechanicjob
 
   - action: waste_time # prevent github throttling
-    seconds: 10
+    seconds: 5
 
   - action: download_github
     dest: ./resources/[qb]/qb-phone
