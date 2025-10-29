@@ -40,6 +40,7 @@ This isn’t just a QBCore base — it’s a **curated starter framework** optim
 
 > ⚠️ This recipe is **not listed** in the default txAdmin recipe browser.
 > To install, you’ll need to add it manually using the **Remote URL** option in txAdmin.
+> Enter in this link: https://raw.githubusercontent.com/TheOrderFivem/txAdminRecipe/refs/heads/main/full.yaml
 
 This recipe is designed for use with [**txAdmin**](https://github.com/tabarra/txAdmin), the most widely used FiveM server management tool.
 
